@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Schema;
 
 class CountProvider extends ServiceProvider
 {
@@ -29,11 +30,11 @@ class CountProvider extends ServiceProvider
         // });
 
         Inertia::share([
-            'count' => Category::count(),
+            'count' => Schema::hasTable('categories') ? Category::count() : 0,
         ]);
 
         Inertia::share([
-            'countpro' => Product::count(),
+            'countpro' => Schema::hasTable('products') ? Product::count() : 0,
         ]);
     }
 }
